@@ -1,0 +1,58 @@
+/* --- Perbaikan Global Mobile Menu & Overlay --- */
+
+/* 1. Panel Menu Samping (Tidak Full Layar) */
+#mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75%; /* Menu hanya selebar 75% layar */
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Gunakan transform untuk animasi geser yang mulus */
+    transform: translateX(100%); 
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. Overlay (Area Hitam Transparan untuk Membatalkan) */
+#menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 90; /* Di bawah menu, tapi di atas konten utama */
+    transition: opacity 0.4s ease;
+}
+
+/* 3. Class Aktif (Dipicu oleh JavaScript) */
+#mobile-menu.active {
+    transform: translateX(0);
+}
+
+#menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 4. Perbaikan Visual Header agar tidak bertumpuk */
+#home {
+    padding-top: 6rem; /* Memberi ruang lebih agar teks tidak tertutup navbar */
+    overflow: hidden;
+}
+
+/* Pastikan sakura tidak menghalangi klik pada tombol */
+#sakura-container {
+    z-index: 0; 
+}
+
+/* Optimasi Ikon Burger agar tetap di atas saat menu buka */
+#burger-btn {
+    z-index: 110; 
+}
